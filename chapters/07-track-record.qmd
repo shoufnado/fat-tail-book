@@ -1,0 +1,48 @@
+---
+title: "Minimum Track Record Length Under Fat Tails"
+subtitle: "How Long Must Performance History Be Before Skill Is Declared?"
+author: "Jean-Marc Choufani"
+date: "2026"
+bibliography: ../references.bib
+---
+
+> **Status:** Planned — research literature surveyed, writing not yet begun
+
+---
+
+::: {.callout-note}
+## Chapter forthcoming
+:::
+
+## Motivation
+
+@bailey2012 derive the Minimum Track Record Length (MinTRL) — the number of observations
+needed to reject, at a given confidence level, the null hypothesis that a manager's Sharpe
+ratio is zero. The derivation assumes finite fourth moment ($\kappa > 4$).
+
+@kao2025 proved in 2025 that the Sharpe ratio converges at rate $n^{1-2/\kappa}$ when
+$\kappa \in (2, 4)$ — slower than the $\sqrt{T}$ Gaussian rate — toward a stable
+distribution with tail index $\kappa/2$.
+
+The practical table that follows from these results does not exist: "At tail exponent
+$\hat{\alpha}$ and significance level $p$, the minimum track record is $N$ years."
+
+## The Claim
+
+At $\hat{\alpha} = 2.69$ (the median in our equity sample), the minimum track record
+required to declare skill at 95% confidence is substantially longer than Gaussian theory
+implies. The precise factor is derivable analytically from the @kao2025 convergence rate
+and verifiable against our cross-sectional $\hat{\alpha}$ distribution.
+
+The implication is philosophical as much as practical: for a large fraction of the
+equity universe, the sample sizes available to any practitioner are insufficient to
+distinguish skill from luck at conventional significance levels — not because the
+practitioner is unlucky, but because the distribution does not permit it.
+
+## Key prior work
+
+- @bailey2012 — Probabilistic Sharpe Ratio and MinTRL
+- @bailey2014 — Deflated Sharpe Ratio
+- @kao2025 — convergence rate under fat tails (critical new anchor)
+- @vlasiuk2025 — Lévy-stable scaling of performance metrics
+- Gap: no explicit $N(\hat{\alpha}, \text{significance})$ table. **Novelty: HIGH.**

@@ -1,0 +1,84 @@
+---
+title: "Preface"
+---
+
+# Preface {.unnumbered}
+
+This is a working monograph. It is incomplete by design — new chapters are added as the
+research develops. Every version is dated. Errors, when found, are corrected in place and
+noted in the [session log](https://github.com/jmchoufani/fat-tail-book/commits/main).
+
+## What this book argues
+
+Standard financial methodology is built on assumptions that break quietly under fat-tailed
+return distributions. The breakdowns are not exotic edge cases — they occur at tail exponents
+routinely observed in real equity data (α ≈ 2–3). Each chapter of this book isolates one
+such breakdown, states the mathematical condition under which it occurs, and quantifies its
+empirical consequence using a panel of 106,163 stock-month observations across 715 U.S.
+equities from 2009 to 2025.
+
+The through-line is epistemological: **the method you choose determines what you can see,
+and the standard toolkit was not designed with fat tails in mind.** This does not mean
+the standard toolkit is always wrong — it means there is an identifiable class of problems
+for which it systematically misleads, and that class is larger than commonly acknowledged.
+
+## Four central claims
+
+1. **The Hill estimator's domain of validity is narrower than its use implies.** Applied
+   to equity returns driven by discrete binary events (regulatory decisions, clinical trial
+   readouts), it is inconsistent for the structural tail exponent. The consequence is
+   systematic misclassification within the Taleb (2025) taxonomy.
+
+2. **Newey-West HAC standard errors address one of two distinct problems introduced by
+   overlapping windows.** They correct serial correlation inflation. They do not correct
+   directional bias in the point estimate — a separate problem that is amplified, not
+   attenuated, by fat-tailed return distributions.
+
+3. **The ergodicity deficit, as formalized by Peters (2019), has not been calibrated to
+   empirically estimated tail exponents.** The standard formula (σ²/2) is undefined for
+   α ≤ 2 and mis-specified for α ∈ (2, 3). The empirical consequence for long-horizon
+   compound growth has not been quantified across tail classes.
+
+4. **The minimum track record required to distinguish skill from luck is a function of
+   the tail exponent of the underlying return distribution.** At α̂ = 2.69 — the median
+   for U.S. equities in this sample — the required track record is substantially longer
+   than Gaussian theory implies, with implications for how investment performance should
+   be evaluated.
+
+## Who this is for
+
+Anyone willing to think carefully about probability and measurement. The mathematics is
+precise but the motivation is accessible: these are questions about what we can and cannot
+know from the data we have, under the distributional conditions that actually obtain.
+
+## On the author
+
+I am an orthodontist. I have no institutional affiliation in finance or mathematics.
+This work is guided entirely by curiosity and by a commitment to getting the mathematics
+right. Every substantive claim has been subjected to adversarial verification — an attempt
+to refute it before publishing it. Where the verification found errors, the errors are
+documented and the corrections noted.
+
+Independent inquiry has a long tradition in quantitative research. What matters is whether
+the argument is correct, not whether the author holds the right credentials. Readers who
+find errors are encouraged to open an issue on the
+[GitHub repository](https://github.com/jmchoufani/fat-tail-book/issues).
+
+## How to cite
+
+> Choufani, J.-M. (2026). *The Measurement Problem: Fat Tails, Estimation, and What
+> Standard Finance Gets Wrong* (working monograph). Retrieved from
+> [URL].
+
+Individual chapters have separate SSRN preprint identifiers where available; these are
+listed at the top of each chapter.
+
+## License
+
+This work is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+You may share and adapt the material for any purpose, provided appropriate credit is given.
+No permission is needed to read, share, or build on this work.
+
+---
+
+*First chapter written: 2026. This version: {{< meta date >}}.*

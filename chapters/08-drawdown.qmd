@@ -1,0 +1,46 @@
+---
+title: "Maximum Drawdown Under Power Laws"
+subtitle: "What the Gaussian Analytical Result Cannot Tell You"
+author: "Jean-Marc Choufani"
+date: "2026"
+bibliography: ../references.bib
+---
+
+> **Status:** Planned — research literature surveyed, writing not yet begun
+
+---
+
+::: {.callout-note}
+## Chapter forthcoming
+:::
+
+## Motivation
+
+@magdon2004 derive the analytical distribution of maximum drawdown under Gaussian
+(Brownian motion) dynamics. The result is elegant: expected drawdown scales as
+$\sqrt{T}$ at zero drift, $\log T$ at positive drift, linearly at negative drift.
+
+For power-law return distributions, no analogous analytical result exists. @vlasiuk2025
+derives single-period drawdown scaling under Lévy-stable dynamics ($\propto \sigma T^{1/\alpha}$)
+but not the full multi-period distributional law.
+
+## The Claim
+
+The distribution of running maximum drawdown as a function of $\alpha$ is not known.
+Our breach_35 and breach_50 empirical data — the fraction of stocks in each tail class
+that breach 35% and 50% peak-to-trough drawdown within a 12-month window — provides
+an empirical anchor for a simulation study calibrated to our observed $\hat{\alpha}$
+cross-section.
+
+The FAT_STRUCTURAL vs FAT_BINARY sub-classification (Chapter 3) predicts that drawdown
+distributions within the SUPER_FAT class should differ: FAT_BINARY stocks have discrete
+jump-driven drawdowns; FAT_STRUCTURAL stocks have continuous power-law drawdowns.
+The distributional shapes differ even when $\hat{\alpha}$ is identical.
+
+## Key prior work
+
+- @magdon2004 — Gaussian analytical result
+- @filimonov2015 — empirical intraday drawdown power laws; dragon-king outliers
+- @goldberg2017 — CED as coherent risk measure (finite variance)
+- @vlasiuk2025 — single-period scaling under stable dynamics
+- Gap: full multi-period distributional law under $\alpha$-stable dynamics. **Novelty: HIGH.**

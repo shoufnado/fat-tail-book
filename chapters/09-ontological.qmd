@@ -1,0 +1,55 @@
+---
+title: "Ontological vs Epistemic Extremes"
+subtitle: "Why FAT_BINARY Events Are Neither Black Swans Nor Power Laws"
+author: "Jean-Marc Choufani"
+date: "2026"
+bibliography: ../references.bib
+---
+
+> **Status:** Planned — target journal: *Synthese*
+
+---
+
+::: {.callout-note}
+## Chapter forthcoming
+:::
+
+## Motivation
+
+@taleb2007 distinguishes Black Swans — high-impact, unpredictable events — from ordinary
+risks. The distinction is primarily epistemic: Black Swans are outside the observer's
+model, not necessarily outside the true distribution.
+
+@colander2010 argues further that Taleb's Black Swan is epistemological (limited
+information) rather than ontological (inherently indeterminate reality). @knight1921
+introduced the foundational distinction between measurable risk and unmeasurable uncertainty.
+
+Neither framework has been formally operationalized using extreme value theory applied
+to the specific case of binary-event-driven fat tails.
+
+## The Claim
+
+FAT_BINARY extreme returns occupy a distinct ontological category from both:
+
+1. **Gaussian extremes** — which are epistemically uncertain (low probability, small
+   magnitude, known distribution)
+2. **Power-law extremes** — which are ontologically fat-tailed (heavy distributional tail,
+   known generating process)
+
+FAT_BINARY extremes are **structurally predictable** in their event space (the trial
+succeeds or fails; the FDA approves or rejects) but **epistemically uncertain** in
+direction. They are not black swans — the event is announced in advance, the magnitude
+is approximately known, the probability structure is binary. Yet they produce the same
+$\hat{\alpha}$ as genuine power-law tails.
+
+This constitutes a third category that existing typologies do not accommodate: the
+**known-structure, unknown-direction extreme**. Formalizing this category using EVT
+and the mixture process of Chapter 3 is the contribution of this chapter.
+
+## Key prior work
+
+- @knight1921 — risk vs uncertainty
+- @colander2010 — epistemic vs ontological black swans
+- @hansen2008 — robust control as formal Knightian uncertainty
+- @taleb2014pp — precautionary principle under fat tails
+- Gap: no formal EVT operationalization of the ontological/epistemic distinction. **Novelty: HIGH.**

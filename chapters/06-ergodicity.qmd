@@ -1,0 +1,44 @@
+---
+title: "Ergodicity Deficit Across Tail Classes"
+subtitle: "When the Peters Formula Breaks Down"
+author: "Jean-Marc Choufani"
+date: "2026"
+bibliography: ../references.bib
+---
+
+> **Status:** Planned — research literature surveyed, writing not yet begun
+
+---
+
+::: {.callout-note}
+## Chapter forthcoming
+
+Literature survey complete (see project repository). Writing begins after Chapters 1–5 are finalized.
+:::
+
+## Motivation
+
+@peters2019 establishes that expected utility maximization — the foundation of standard
+portfolio theory — implicitly assumes ergodicity: that the time-average growth rate of
+a compounding process equals its ensemble average. Under geometric Brownian motion, this
+assumption fails, and the ergodicity deficit equals $\sigma^2/2$.
+
+The Peters formula, however, assumes Gaussian dynamics. It is undefined for $\alpha \leq 2$
+(where variance is infinite) and has not been calibrated to an empirically estimated tail
+exponent $\hat{\alpha}$ across any equity cross-section.
+
+## The Open Question
+
+How does the ergodicity deficit change as a function of $\alpha$ in the range $(2, 4)$?
+Is there a regime transition at $\alpha = 2$ where the standard formula breaks down?
+Can the deficit be estimated directly from Hill estimator output?
+
+Our 715-stock cross-section with measured $\hat{\alpha}$ per ticker provides the
+instrument to answer these questions empirically for the first time.
+
+## Key prior work
+
+- @peters2019 — ergodicity economics framework
+- @peters2011 — optimal leverage from non-ergodicity
+- @gabaix2003 — empirical equity tail exponent $\alpha \approx 3$
+- Gap: no paper bridges Peters + Gabaix. **Novelty: HIGH.**

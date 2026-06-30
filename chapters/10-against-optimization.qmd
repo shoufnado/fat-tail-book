@@ -1,0 +1,66 @@
+---
+title: "Against Optimization"
+subtitle: "Why Fat Tails Make the Optimal Strategy Epistemically Unavailable"
+author: "Jean-Marc Choufani"
+date: "2026"
+bibliography: ../references.bib
+---
+
+> **Status:** Planned — target journal: *Erkenntnis* or *Synthese*
+
+---
+
+::: {.callout-note}
+## Chapter forthcoming
+:::
+
+## Motivation
+
+Portfolio optimization — maximize expected utility subject to distributional constraints —
+requires that the distribution of returns be estimable from available data. Under Gaussian
+assumptions, moment estimators converge at rate $\sqrt{T}$ and the optimization problem
+is well-conditioned for realistic sample sizes.
+
+Under fat-tailed distributions, this assumption fails systematically. @taleb2025 (Ch. 3–4)
+proves that sample estimators of mean and variance converge far slower than $\sqrt{T}$
+under power-law tails, making standard statistical inference unreliable at realistic
+sample sizes. @michaud1989 showed that even under Gaussian assumptions, sample estimation
+error dominates the optimization, producing portfolios that are optimized for measurement
+noise rather than true parameters.
+
+Under fat tails with $\hat{\alpha} \in (2, 3)$, the Michaud problem is dramatically worse.
+
+## The Claim
+
+The claim is epistemological: optimization is not merely imprecise under fat tails —
+it is epistemically unavailable. The data required to close the estimation gap exceeds
+any realistic investment horizon.
+
+This can be stated precisely. Chapter 7 establishes the minimum track record required
+to detect a given information ratio at significance level $p$ under tail exponent
+$\hat{\alpha}$. The analogous result for optimization holds: the minimum sample size
+to identify the optimal portfolio within a given tolerance is a function of $\hat{\alpha}$,
+and at $\hat{\alpha} = 2.69$, that minimum exceeds the observable sample by a derivable
+factor.
+
+The rational response to this result is robustness — the barbell strategy that Taleb
+advocates — rather than optimization. This chapter provides the mathematical
+justification for that preference as a theorem, not an intuition.
+
+## Connection to the Precautionary Principle
+
+The @taleb2014pp precautionary principle argues that for systems with fat-tailed harm
+distributions, expected-value frameworks fail. Combined with the unavailability of
+optimization established here, PP implies a specific portfolio structure: maximize
+resilience to estimation error (robustness) rather than expected utility of an estimated
+distribution (optimization). The two arguments — PP and estimation unavailability —
+converge on the same structural recommendation from different directions.
+
+## Key prior work
+
+- @taleb2025 — statistical consequences of fat tails; moment estimation failure
+- @michaud1989 — estimation error dominates optimization under Gaussian assumptions
+- @taleb2014pp — precautionary principle under systemic fat-tail risk
+- @peters2019 — ergodicity and the failure of ensemble optimization (Chapter 6 connection)
+- Gap: mathematical proof that optimization is epistemically unavailable (not merely
+  imprecise) at empirically calibrated $\hat{\alpha}$. **Novelty: MEDIUM-HIGH.**

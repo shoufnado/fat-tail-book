@@ -1,0 +1,49 @@
+---
+title: "The Nine-Gate Framework"
+subtitle: "A Diagnostic Protocol for Fat-Tail Signal Validation"
+author: "Jean-Marc Choufani"
+date: "2026"
+bibliography: ../references.bib
+---
+
+> **Status:** Draft in progress (`paper5_gauntlet_framework.md`)
+
+---
+
+::: {.callout-note}
+## Chapter in progress
+
+This chapter is under active development. The framework is designed and the gates are
+defined; the full write-up is forthcoming. The working draft is available on request.
+:::
+
+## Overview
+
+The preceding four chapters document specific methodological failures: look-ahead
+contamination, estimator inconsistency under mixture processes, and incomplete bias
+correction. A practitioner encountering a new signal needs a systematic protocol for
+checking which of these failures — and others — may be active simultaneously.
+
+The Nine-Gate Framework is that protocol. Each gate is a binary pass/fail test.
+A signal must pass all nine gates before it can be described as validated under
+fat-tail conditions. The gates address:
+
+| Gate | Threat addressed |
+|---|---|
+| Gate 1: Point-in-time discipline | Look-ahead contamination (Chapter 4) |
+| Gate 2: Prospective vs contaminated divergence | Problem 2 bias (Chapter 4) |
+| Gate 3: Source-of-tail pre-classification | Hill estimator domain of validity (Chapter 3) |
+| Gate 4: Distribution-free test statistics | Mean inflation under fat tails (Chapter 1) |
+| Gate 5: Multiple-testing correction | Deflated Sharpe Ratio / PBO |
+| Gate 6: Effective sample size | Serial correlation via Newey-West (Chapter 4) |
+| Gate 7: Regime robustness | Single-regime artifacts |
+| Gate 8: Mechanism plausibility | Economic mechanism, not data mining |
+| Gate 9: Out-of-sample accumulation | Live forward validation |
+
+The framework operationalizes the epistemological argument running through this monograph:
+a result that cannot survive these nine gates is not a finding — it is a measurement artifact.
+
+---
+
+*Full chapter forthcoming. Subscribe to the [Substack](https://substack.com) for updates,
+or watch the [GitHub repository](https://github.com/jmchoufani/fat-tail-book) for new commits.*

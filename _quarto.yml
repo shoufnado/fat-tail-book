@@ -1,0 +1,82 @@
+project:
+  type: book
+  output-dir: _site
+
+book:
+  title: "The Measurement Problem"
+  subtitle: "Fat Tails, Estimation, and What Standard Finance Gets Wrong"
+  author:
+    - name: Jean-Marc Choufani
+      affiliation: Independent Researcher
+      email: choufani8@gmail.com
+  date: "2026"
+  date-format: "YYYY"
+  repo-url: https://github.com/shoufnado/fat-tail-book
+  repo-actions: [issue]
+  search: true
+  downloads: [pdf]
+  sidebar:
+    style: floating
+    search: true
+
+  chapters:
+    - index.qmd
+    - part: "Part I — The Taxonomy Problem"
+      chapters:
+        - chapters/01-predictable-tail.qmd
+        - chapters/02-lottery-stocks.qmd
+    - part: "Part II — The Estimation Problem"
+      chapters:
+        - chapters/03-hill-estimator.qmd
+        - chapters/04-newey-west.qmd
+    - part: "Part III — The Inference Framework"
+      chapters:
+        - chapters/05-nine-gate.qmd
+    - part: "Part IV — Forthcoming"
+      chapters:
+        - chapters/06-ergodicity.qmd
+        - chapters/07-track-record.qmd
+        - chapters/08-drawdown.qmd
+        - chapters/09-ontological.qmd
+        - chapters/10-against-optimization.qmd
+
+bibliography: references.bib
+csl: chicago-author-date.csl
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    code-fold: true
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    fig-align: center
+    math: mathjax
+    css: custom.css
+    include-in-header:
+      text: |
+        <meta name="description" content="A working monograph on fat-tail estimation, statistical epistemology, and what standard finance methodology gets wrong. By Jean-Marc Choufani, independent researcher.">
+  pdf:
+    documentclass: article
+    geometry:
+      - top=1in
+      - bottom=1in
+      - left=1.2in
+      - right=1.2in
+    fontsize: 11pt
+    linestretch: 1.4
+    papersize: letter
+    keep-tex: false
+    include-in-header:
+      text: |
+        \usepackage{amsmath,amssymb,amsthm}
+        \usepackage{booktabs}
+        \usepackage{hyperref}
+        \newtheorem{proposition}{Proposition}
+        \newtheorem{definition}{Definition}
+        \newtheorem{theorem}{Theorem}
+        \newtheorem{corollary}{Corollary}
+        \theoremstyle{remark}
+        \newtheorem{remark}{Remark}

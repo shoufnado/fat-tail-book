@@ -1,0 +1,102 @@
+---
+title: "Not All Lottery Stocks Are Equal"
+subtitle: "Source-of-Tail as a Missing Dimension in the Fat-Tail Taxonomy"
+author: "Jean-Marc Choufani"
+date: "2026"
+bibliography: ../references.bib
+---
+
+> **SSRN:** Pending review (submitted 2026-06-29)
+> **Status:** Under editorial review
+
+---
+
+## Abstract
+
+The Taleb (2025) taxonomy classifies equities by tail exponent: THIN, SUBEXP, FAT, and
+SUPER_FAT (α ≤ 2). Among SUPER_FAT tickers (n = 78 in our 715-equity study universe),
+we identify a 13.7 percentage-point spread in payoff-weighted expected value between two
+economically distinct subpopulations that the taxonomy treats as equivalent: FAT_STRUCTURAL
+stocks (n = 70), whose extreme returns arise from a continuous power-law tail, achieve
++7.74% expected value per signal with skill score +0.423; FAT_BINARY stocks (n = 8),
+whose extreme returns arise from the resolution of discrete binary events (FDA decisions,
+clinical trial readouts), achieve −5.96% with skill score −0.922. Binary win rates are
+approximately 49% for both groups — the Hill estimator generates the same classification
+for populations that are empirically indistinguishable by direction but have opposite
+economic outcomes.
+
+Source-of-tail classification is not an extension of the existing taxonomy. It is a
+prerequisite for determining whether the Hill estimator's output is meaningful at all.
+
+---
+
+## 1. The Binary Event Problem
+
+Not all extreme equity returns have the same origin. For most companies, the largest
+return realizations are draws from a continuous distribution — the structural right tail
+of the return process, driven by compounding of good outcomes. For a specific and
+identifiable class of companies, the largest returns are instead the resolution of
+discrete binary events of large magnitude: a Phase 3 clinical trial succeeds or fails;
+an FDA decision is approved or rejected.
+
+These two generating mechanisms produce statistically similar tail exponents when measured
+by the Hill estimator, but they are economically and probabilistically distinct.
+
+## 2. Taxonomy Extension: FAT_STRUCTURAL and FAT_BINARY
+
+We define the mixture process:
+
+$$X = (1 - B) \cdot Z_S + B \cdot J$$
+
+where $B \sim \text{Bernoulli}(p)$, $Z_S$ is drawn from a continuous power-law distribution
+with tail exponent $\alpha_S$, and $J$ is a random variable representing the binary event
+payoff.
+
+**FAT_STRUCTURAL:** The top-$k$ order statistics are dominated by draws from $Z_S$.
+The Hill estimator is consistent for $\alpha_S$.
+
+**FAT_BINARY:** The top-$k$ order statistics contain a non-negligible fraction of $J$
+realizations (see Chapter 3 for the formal inconsistency argument). The Hill estimator
+converges to a quantity depending on $(\alpha_S, p, J^+)$ that is not separately
+identified from order statistics alone.
+
+## 3. Empirical Results
+
+| Subgroup | n | EV per signal | Skill score | Binary win rate |
+|---|---|---|---|---|
+| FAT_STRUCTURAL | 70 | +7.74% | +0.423 | ~49% |
+| FAT_BINARY | 8 | −5.96% | −0.922 | ~49% |
+| **Spread** | | **13.7pp** | **1.345** | **~0** |
+
+The binary win rates are statistically indistinguishable between groups. The Hill estimator
+cannot see the difference. The economic outcomes are opposite.
+
+::: {.callout-caution}
+The FAT_BINARY result (n = 8) provides directional evidence only at this sample size.
+No magnitude claim should be made without confidence intervals. The structural result
+(n = 70) is on firmer statistical ground.
+:::
+
+## 4. Sector Composition
+
+The FAT_STRUCTURAL subgroup is dominated by Financials (25%), Energy (13%), Utilities
+(11%), and Real Estate (10%) — rate-sensitive, value-oriented names with left-tail risk
+and positive drift. The FAT_BINARY subgroup is dominated by Healthcare (biopharmaceutical
+names facing binary regulatory events).
+
+This sector decomposition is the mechanism: the taxonomy conflates two economically
+opposite types of stock under a shared statistical label.
+
+## 5. Implications
+
+The consequence is not merely taxonomic. Risk models that apply uniform tail-class
+multipliers to all SUPER_FAT stocks are mis-specified. The appropriate multiplier for
+FAT_STRUCTURAL and FAT_BINARY stocks differs in sign, not just magnitude.
+
+The formal mathematical argument for why the Hill estimator cannot distinguish these
+cases is developed in Chapter 3.
+
+---
+
+*→ Chapter 3 provides the mathematical foundation: why the Hill estimator is inconsistent
+for the structural tail exponent when the return process contains a binary-event component.*

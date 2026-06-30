@@ -1,0 +1,125 @@
+---
+title: "The Predictable Tail"
+subtitle: "Lottery Characteristics Price Drawdown, Not Return"
+author: "Jean-Marc Choufani"
+date: "2026"
+bibliography: ../references.bib
+---
+
+> **SSRN:** [abstract_id=6899979](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6899979)
+> **Status:** Live preprint
+
+---
+
+## Abstract
+
+We test whether payoff asymmetry (PA) — derived from the Hill estimator of individual equity
+return distributions — predicts forward equity returns when computed prospectively over 106,163
+stock-month observations (715 U.S. equities, 2009–2025). Using distribution-free statistics
+appropriate for fat-tailed data, we find: (1) PA is a monotonic, symmetric, *inverted*
+predictor — low-PA names outperform with a 63.6% win rate and +4.90% 60-day median, while
+high-PA names underperform; (2) the same tail class (SUPER_FAT, α ≤ 2) produces 70.4% win
+at the bottom of PA and 34.8% at the top — tail class alone is insufficient, direction
+matters; (3) Fama-MacBeth regressions fail to detect the signal (t = 1.37) because it is
+nonlinear and tail-concentrated; (4) common backtests using current PA values are
+look-ahead-contaminated, overstating the apparent edge by 35+ percentage points.
+The mechanism is the equity lottery premium: high-PA stocks exhibit positive-skew,
+negative-drift payoff structures; low-PA stocks exhibit positive drift with occasional
+large left-tail events.
+
+---
+
+## 1. Introduction
+
+The practitioner intuition is intuitive: high payoff asymmetry — a return distribution with
+large upside relative to downside — should predict positive future performance. A stock
+whose historical gains have consistently exceeded its historical losses in magnitude sounds
+like a stock worth holding.
+
+The data says the opposite.
+
+This chapter documents the inversion and its mechanism. It also documents a methodological
+trap: computing payoff asymmetry from *current* data and testing it against *past* outcomes
+— a form of look-ahead contamination that inflates apparent predictive power by 35 percentage
+points and flips the sign of the conclusion.
+
+The inversion is not a curiosity. It is a consequence of the equity lottery premium
+[@boyer2010expected]: stocks with lottery-like payoff structures (large right tail, positive
+skew) attract speculative demand that raises prices and depresses subsequent returns. Payoff
+asymmetry, correctly computed prospectively, identifies this structure in real time.
+
+## 2. The Payoff Asymmetry Metric
+
+**Definition.** For a return series $\{r_t\}$ over a trailing $T$-day window:
+
+$$PA = \frac{E[r \mid r > 0]}{E[|r| \mid r < 0]}$$
+
+A stock with PA > 1 has average gains exceeding average losses in magnitude. A stock with
+PA < 1 has average losses exceeding average gains.
+
+PA is computed from a 756-day (3-year) trailing window of daily returns, prospectively —
+using only data available before the evaluation date. The tail class (THIN, SUBEXP, FAT,
+SUPER_FAT) is derived from the Hill estimator applied to the same window.
+
+## 3. Main Results {#sec-ch1-results}
+
+| PA Group | N | Win% | Median 60d Return |
+|---|---|---|---|
+| Bottom 2.5% | 423 | 66.7% | +6.14% |
+| Bottom 10% | 1,694 | 63.6% | +4.90% |
+| Baseline | — | 59.7% | — |
+| Top 10% | 1,695 | 53.3% | +1.91% |
+| Top 1% | 170 | 40.6% | −4.60% |
+
+: Full-distribution PA results (N=16,948, 2009–2025, prospective, look-ahead-clean) {#tbl-ch1-main}
+
+The bottom-10% 95% CI [61.2%, 65.9%] does not overlap with baseline [59.0%, 60.4%].
+Mann-Whitney bottom 10% vs top 10%: p < 10⁻⁶.
+
+Within SUPER_FAT (α ≤ 2): bottom 10% PA → 70.4% win (+7.82% median);
+top 10% PA → 34.8% win (−8.76% median). The same tail class, opposite outcomes.
+
+## 4. Why Standard Methods Miss It
+
+On the same 112,152 observations (T = 202 monthly Fama-MacBeth periods):
+
+- Spearman rank correlation (median-like, robust): PA ↔ return = **−0.045, p < 10⁻⁴**
+- Linear Fama-MacBeth (conditional mean, OLS): PA coefficient t = +1.74 → +0.13 in the
+  full model (effectively zero)
+
+OLS fits the conditional mean. Fat tails inflate the mean at the high-PA extreme
+(top 1%: median −5.04% but mean +8.72%). Rank methods neutralize the moonshots and
+reveal the typical outcome. This is @taleb2025 §3.4 Consequences 2 and 7 demonstrated
+simultaneously on real equity data.
+
+## 5. The Look-Ahead Contamination
+
+Computing PA from current data and testing against past outcomes creates an artifact:
+a stock that has already risen shows high PA and high realized returns simultaneously.
+This is circular.
+
+| Method | Win Rate (top decile) |
+|---|---|
+| Contaminated (current PA, past outcomes) | 76–100% |
+| Prospective (PA before evaluation date) | 40.6% |
+| Contamination | ~35 percentage points |
+
+The contaminated result is what most practitioners compute. The prospective result is what
+actually occurs.
+
+## 6. Conclusion
+
+Payoff asymmetry predicts forward equity returns — in the opposite direction from naive
+expectation. The mechanism is the equity lottery premium. Standard linear factor models
+cannot detect the signal because it is nonlinear and tail-concentrated. Common backtest
+implementations are contaminated by look-ahead bias that inflates apparent win rates by
+35+ percentage points and reverses the conclusion.
+
+The implication for the taxonomy developed in subsequent chapters: measuring the tail
+exponent α alone is insufficient. The direction of payoff asymmetry within a tail class
+is the economically relevant variable.
+
+---
+
+*→ Chapter 2 explores why this direction varies systematically across identifiable subgroups
+within the SUPER_FAT class.*

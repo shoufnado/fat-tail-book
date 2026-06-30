@@ -1,0 +1,164 @@
+---
+title: "The Hill Estimator's Domain of Validity"
+subtitle: "Source-of-Tail Classification Reveals Systematic Misclassification in Power-Law Tail Analysis"
+author: "Jean-Marc Choufani"
+date: "2026"
+bibliography: ../references.bib
+---
+
+> **SSRN:** Pending review (submitted 2026-06-29)
+> **Status:** Under editorial review
+
+---
+
+## Abstract
+
+The Hill (1975) estimator is the canonical statistic for characterizing power-law tail
+behavior, and it underpins the tail class taxonomy formalized by @taleb2025: THIN, SUBEXP,
+FAT, and SUPER_FAT. This estimator is consistent under a well-defined regularity condition:
+the survival function must satisfy
+
+$$\lim_{u \to \infty} \frac{1 - F(ux)}{1 - F(u)} = x^{-\alpha} \quad \text{for all } x > 0$$
+
+We argue that this condition is violated, in the practically relevant finite-sample sense,
+for an identifiable class of equities: those whose extreme return realizations arise
+predominantly from the resolution of discrete binary events of large magnitude.
+For such stocks — biopharmaceutical companies facing FDA decisions and clinical trial
+readouts are the canonical example — the top-$k$ order statistics used by the Hill
+estimator contain a non-negligible fraction of discrete jump observations that do not
+vanish as $n$ grows with $k = \lfloor 0.10n \rfloor$. The resulting $\hat{\alpha}$ is not
+a consistent estimator of the structural tail exponent $\alpha_S$; it converges to a
+quantity that depends on both $\alpha_S$ and the jump parameters $(p, J^+)$ in a way
+that is not separately identified from order statistics alone.
+
+The consequence is systematic misclassification within the @taleb2025 taxonomy.
+We demonstrate the empirical cost in a panel of 106,163 stock-month observations
+(715 U.S. equities, 2009–2025): a 13.7 percentage-point expected-value spread between
+FAT_STRUCTURAL and FAT_BINARY stocks that $\hat{\alpha}$ treats as identical.
+Source-of-tail classification is not an extension of the taxonomy — it is a prerequisite
+for determining whether the Hill estimator should be applied at all.
+
+---
+
+## 1. The Hill Estimator and Its Domain
+
+### 1.1 The Estimator
+
+Given an i.i.d. sample $X_1, \ldots, X_n$ with order statistics $X_{(1)} \geq X_{(2)}
+\geq \cdots \geq X_{(n)}$, the Hill estimator with threshold parameter $k$ is:
+
+$$\hat{\alpha} = \left( \frac{1}{k} \sum_{i=1}^{k} \ln X_{(i)} - \ln X_{(k+1)} \right)^{-1}$$
+
+In our application, $k = \lfloor 0.10n \rfloor$ — the top 10% of return realizations.
+
+### 1.2 Consistency Requires Regular Variation, Not Absolute Continuity
+
+A key clarification: the regular variation condition
+
+$$\lim_{u \to \infty} \frac{1 - F(ux)}{1 - F(u)} = x^{-\alpha}$$
+
+does **not** require the distribution $F$ to be absolutely continuous. A discrete atom at
+a finite fixed point $J^+ < \infty$ does not violate regular variation asymptotically —
+for $u > J^+$, the atom contributes nothing to the tail ratio.
+
+The problem is finite-sample, not asymptotic. The atom at $J^+$ contamination the top-$k$
+order statistics at any fixed $k/n$ fraction, because the jump observations occupy stable
+positions in the ranking and do not vanish as $n \to \infty$.
+
+### 1.3 The Mixture Process
+
+Let the return process be:
+
+$$X = (1 - B) \cdot Z_S + B \cdot J$$
+
+where:
+- $B \sim \text{Bernoulli}(p)$, $p > 0$
+- $Z_S \sim F_S$ with $F_S$ satisfying regular variation with exponent $\alpha_S$
+- $J$ is a random variable with $P(J = J^+) = \pi$, $J^+ > 0$
+
+## 2. The Inconsistency Proposition
+
+::: {#prp-inconsistency}
+**Proposition (Hill Estimator Inconsistency Under Mixture).** Under the mixture process
+above, with $k = \lfloor 0.10n \rfloor$ and $p > 0$:
+
+(i) As $n \to \infty$, a positive fraction of the top-$k$ order statistics are
+    $J$-component observations with probability approaching 1.
+
+(ii) The Hill estimator $\hat{\alpha}$ converges to a limit that depends on
+    $(\alpha_S, p, J^+)$ rather than on $\alpha_S$ alone.
+
+(iii) $\hat{\alpha}$ is not a consistent estimator of $\alpha_S$; the estimand is a
+     function of all three parameters and is not separately identified from order
+     statistics alone.
+:::
+
+**Proof sketch.** The fraction of top-$k$ observations from the binary-jump component
+converges to a positive constant as $n \to \infty$ with $k = \lfloor 0.10n \rfloor$
+fixed — it does not vanish. Each such observation contributes to the Hill sum a term
+$\ln J^+ - \ln X_{(k+1)}$ rather than the structural-tail term. The resulting limit
+is a function of $(\alpha_S, p, J^+)$. Since $p$ and $J^+$ are not separately
+identified from the order statistics $X_{(1)}, \ldots, X_{(k)}$ alone, consistency
+for $\alpha_S$ fails. $\square$
+
+**Differentiation from prior literature.** @cont2004 and @ait-sahalia2009 address jump
+detection in continuous-time processes — separating continuous and jump components.
+Our claim is distinct: we do not argue that jumps can be detected; we argue that the
+Hill estimator applied to a mixture process produces an inconsistent estimator for the
+structural tail exponent, regardless of whether jumps are detected or not.
+
+## 3. Empirical Evidence
+
+### 3.1 Identification
+
+FAT_BINARY stocks are identified by sector and catalyst type:
+- Biopharmaceutical companies with pending FDA decisions or Phase 3 trial readouts
+- Companies with outstanding regulatory binary events of large magnitude
+
+In our 715-equity universe, n = 8 FAT_BINARY and n = 70 FAT_STRUCTURAL within the
+SUPER_FAT class (α ≤ 2).
+
+### 3.2 The 13.7pp Spread
+
+| Classification | n | EV per signal | Hill class |
+|---|---|---|---|
+| FAT_STRUCTURAL | 70 | +7.74% | SUPER_FAT |
+| FAT_BINARY | 8 | −5.96% | SUPER_FAT |
+
+The Hill estimator assigns identical tail-class labels to both groups. Binary win rates
+are approximately 49% for both — the estimator is blind to the distinction.
+
+### 3.3 Binary Win Rates as a Diagnostic
+
+The binary win rate is the fraction of forward 60-day windows in which the return is
+positive. A binary win rate of ~49% for both FAT_STRUCTURAL and FAT_BINARY confirms
+that the estimator cannot distinguish the populations directionally.
+
+## 4. What This Does Not Claim
+
+This chapter does not claim that:
+
+1. Every FAT_BINARY stock is a bad investment. The n = 8 result provides directional
+   evidence only; individual FAT_BINARY names may have favorable characteristics.
+
+2. The Hill estimator is wrong in general. It is consistent under regular variation;
+   the critique is limited to the mixture case with a non-vanishing binary-event component.
+
+3. Regular variation is violated asymptotically by binary events. The violation is
+   finite-sample — practically relevant at n ≈ 750 daily observations (3 years), which
+   is the estimation window used throughout.
+
+## 5. Implications for the Taleb Taxonomy
+
+@taleb2025 (§18, p. 366) derives the Hill estimator and applies it to classify return
+distributions into THIN, SUBEXP, FAT, and SUPER_FAT. The taxonomy is correct for
+distributions satisfying regular variation with a continuous structural tail. The
+extension proposed here — adding a source-of-tail dimension — is not a critique of the
+taxonomy itself. It is a prerequisite for knowing when the estimator that builds the
+taxonomy is applicable.
+
+---
+
+*→ Chapter 4 addresses a separate methodological problem: what Newey-West standard
+errors do and do not fix when rolling-window statistics are evaluated against overlapping
+outcome windows.*

@@ -1,0 +1,166 @@
+---
+title: "Two Problems, One Incomplete Fix"
+subtitle: "Newey-West Corrects for Overlap Autocorrelation But Not Overlap Bias, and Fat Tails Make the Uncorrected Problem Larger"
+author: "Jean-Marc Choufani"
+date: "2026"
+bibliography: ../references.bib
+---
+
+> **SSRN:** Pending review (submitted 2026-06-29)
+> **Status:** Under editorial review
+
+---
+
+## Abstract
+
+The standard remedy for rolling-window statistics evaluated against overlapping outcome
+windows is to apply Newey-West HAC standard errors. This remedy is correct but incomplete.
+It addresses one of two distinct problems introduced by overlapping estimation and outcome
+windows: serial correlation inflation, which biases $t$-statistics upward. It does not
+address the second problem — directional bias in the point estimate, which biases the
+estimand itself in a predictable direction. These are separate problems requiring separate
+remedies.
+
+We formalize this decomposition for the payoff asymmetry statistic
+$PA = E[r \mid r > 0] / E[|r| \mid r < 0]$, estimated over a trailing 756-day window
+of daily returns evaluated against 60-day forward outcomes (overlap fraction
+$\varphi = 60/756 \approx 7.9\%$). Using 106,163 stock-month observations across
+715 U.S. equities from 2009 to 2025, we demonstrate that Problem 1 (serial correlation)
+is correctly addressed by Newey-West with $L = \lceil 60/21 \rceil = 3$ lags and
+effective sample size $n_{\text{eff}} \approx 28{,}240$; Problem 2 (directional bias)
+shifts the bottom-decile win rate by $-12.9$ percentage points and the top-decile win
+rate by $+3.6$ percentage points, compressing a prospective $+11.3$ pp spread to a
+$-5.2$ pp reversed spread — and is not corrected by any standard error adjustment.
+
+Under fat-tailed return distributions (median $\hat{\alpha} = 2.69$, FAT class),
+Problem 2 is amplified beyond the $O(\varphi)$ first-order prediction by a factor we
+calibrate at approximately $1.6\times$. The mechanism is not that fat-tailed extremes
+are larger in absolute value than Gaussian extremes (they need not be at $\alpha = 2.69$),
+but that a single extreme contaminating observation contributes disproportionately to
+the ratio statistic relative to the typical observation.
+
+Researchers who apply Newey-West and treat the overlap issue as resolved cannot determine
+from that result alone whether significance reflects genuine signal, Problem 1, or Problem 2.
+
+---
+
+## 1. Two Problems
+
+### 1.1 Problem 1: Serial Correlation
+
+When estimation windows overlap, successive observations of the statistic share data.
+For a 756-day trailing window evaluated monthly, consecutive monthly estimates share
+approximately 755/756 of their underlying data. This creates serial correlation in the
+test statistic that inflates the effective $t$-ratio.
+
+**Problem 1 is well understood and correctly addressed by Newey-West.**
+
+@hansen1980 and @newey1987 establish the correct HAC standard error for Problem 1.
+With overlap $h$ days and a monthly observation frequency (21 trading days), the
+appropriate lag order is $L = \lceil h/21 \rceil$. At $h = 60$ days: $L = 3$ lags.
+The effective sample size is $n_{\text{eff}} \approx n / (1 + 2 \times \rho_1 / (1 - \rho_1))$
+where $\rho_1 = 0.58$ is the empirically observed first-order autocorrelation.
+At our sample size: $n_{\text{eff}} \approx 28{,}240$.
+
+### 1.2 Problem 2: Directional Bias in the Estimand
+
+Overlap between the estimation window (used to compute PA) and the outcome window
+(used to evaluate the signal) introduces a directional bias in the point estimate itself.
+Observations in the overlap period contribute to both the PA computation and the outcome
+evaluation — creating a mechanical positive correlation when the outcome is positive and
+a mechanical negative correlation when the outcome is negative.
+
+**Problem 2 is not addressed by Newey-West or any standard error adjustment.** Standard
+errors describe the precision of an estimate; they do not correct for systematic bias
+in what is being estimated.
+
+## 2. Formal Decomposition
+
+Let $PA_t$ denote the payoff asymmetry computed from the trailing 756-day window ending
+at $t$, and let $r_{t+1:t+h}$ denote the $h$-day forward return.
+
+The contaminated estimand is:
+
+$$\widetilde{PA}_t = \frac{\frac{n^+_{\text{clean}} \bar{r}^+_{\text{clean}} + n^+_{\text{overlap}} \bar{r}^+_{\text{overlap}}}{n^+_{\text{clean}} + n^+_{\text{overlap}}}}{\frac{n^-_{\text{clean}} |\bar{r}^-_{\text{clean}}| + n^-_{\text{overlap}} |\bar{r}^-_{\text{overlap}}|}{n^-_{\text{clean}} + n^-_{\text{overlap}}}}$$
+
+where "overlap" observations are the $h$ days shared between the estimation and outcome
+windows. The prospective estimand excludes the overlap period entirely.
+
+::: {#prp-bias-direction}
+**Proposition 1 (Direction of Bias).** Conditional on a positive 60-day outcome
+($r_{t+1:t+h} > 0$), the overlap observations are drawn from a truncated positive
+distribution. The contaminated $\widetilde{PA}_t$ exceeds the prospective $PA_t$ in
+expectation, creating upward bias in the numerator. The reverse holds for negative
+outcomes. The net effect biases $\widetilde{PA}_t$ toward positive values when
+measured contemporaneously with positive outcomes.
+:::
+
+## 3. Empirical Magnitude
+
+| Metric | Prospective | Contaminated | Shift |
+|---|---|---|---|
+| Bottom-decile win rate | 63.9% | 51.0% | −12.9 pp |
+| Top-decile win rate | 52.6% | 56.2% | +3.6 pp |
+| Spread (bottom − top) | +11.3 pp | −5.2 pp | **−16.5 pp (sign reversal)** |
+
+The contaminated measurement reverses the sign of the spread. Newey-West corrects the
+standard error on the contaminated estimate — it does not restore the prospective result.
+
+## 4. Fat-Tail Amplification
+
+Under Gaussian assumptions, Problem 2 is an $O(\varphi)$ effect — approximately
+proportional to the overlap fraction $\varphi = 7.9\%$.
+
+Under fat-tailed distributions with $\hat{\alpha} = 2.69$, we observe a $1.6\times$
+amplification beyond the $O(\varphi)$ first-order prediction.
+
+The mechanism: a single extreme return in the overlap period contributes to the PA
+ratio statistic with a weight proportional to its magnitude relative to the average.
+Under fat tails, this relative weight is larger than under Gaussian assumptions because:
+
+1. Extreme observations are more extreme relative to the distributional mean
+2. Conditioning on a positive 60-day outcome truncates extreme losses from the
+   denominator by an amount that grows as $\alpha$ decreases
+
+::: {.callout-note}
+The amplification mechanism is about *relative influence on the ratio statistic*, not
+about the absolute size of extreme returns. At $\alpha = 2.69$ and horizon $h = 60$:
+$60^{1/2.69} \approx 4.6 < 60^{0.5} \approx 7.75$ — fat-tailed extremes are not
+larger in absolute value than Gaussian extremes at this exponent. The amplification
+is a consequence of ratio statistic behavior, not absolute magnitude.
+:::
+
+## 5. Differentiation from Prior Literature
+
+@valkanov2003 and @boudoukh2008 address the variance-vs-bias distinction in long-horizon
+OLS regressions with persistent regressors. This chapter extends to:
+
+1. **Ratio statistics** (not OLS coefficients) — PA is a ratio of conditional means,
+   not a regression coefficient, and exhibits different contamination behavior
+2. **Fat-tailed return distributions** — first empirical calibration of the amplification
+   factor (1.6×) at an empirically observed $\hat{\alpha}$
+3. **A practical diagnostic** — the sign reversal between prospective and contaminated
+   spreads as a signature of Problem 2 (Problem 1 alone cannot reverse a sign)
+
+@hansen1980 and @newey1987 establish the correct treatment for Problem 1.
+This chapter does not challenge that treatment — it argues that Problem 1 correction
+is routinely applied while Problem 2 is left unaddressed.
+
+## 6. The Diagnostic
+
+A simple diagnostic distinguishes Problem 1 from Problem 2:
+
+1. **Compute the statistic prospectively** (excluding the overlap period from the
+   estimation window). If the $t$-statistic collapses, Problem 2 was driving apparent
+   significance.
+2. **Apply Newey-West to the prospective result** (addressing Problem 1). If significance
+   survives, the signal is real.
+
+A Newey-West $t > 2$ on a contaminated estimate does not survive this two-step filter
+if Problem 2 was active. The 12.9pp bottom-decile shift in our data illustrates what
+"Problem 2 active" looks like empirically.
+
+---
+
+*→ Chapter 5 develops the Nine-Gate Framework: a diagnostic protocol for distinguishing
+genuine signal from measurement artifacts across multiple simultaneous threats to validity.*
